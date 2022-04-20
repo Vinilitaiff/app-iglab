@@ -1,4 +1,6 @@
+import { UseGuards } from '@nestjs/common';
 import { Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { AuthorizationGuard } from '../../auth/authorization.guard';
 import { CoursesService } from '../../services/courses.service';
 import { EnrollmentsService } from '../../services/enrollments.service';
 import { StudentsService } from '../../services/students.service';
@@ -13,7 +15,7 @@ export class EnrollmentsResolver {
   ) {}
 
   @Query(() => [Enrollment])
-  //@UseGuards(AuthorizationGuard)
+  @UseGuards(AuthorizationGuard)
   enrollments() {
     return this.enrollmentsService.listAllEnrollments();
   }
