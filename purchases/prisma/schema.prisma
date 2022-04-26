@@ -15,7 +15,7 @@ model Customer {
 
   authUserId String? @unique
 
-  Purchases Purchase[]
+  purchases Purchase[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
@@ -25,10 +25,11 @@ model Customer {
 model Product {
   id String @id @default(uuid())
 
-  PurchasedOn Purchase[]
+  title String
+  slug  String @unique
 
-  title     String
-  slug      String   @unique
+  purchasedOn Purchase[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
@@ -45,8 +46,7 @@ model Purchase {
 
   status PurchaseStatus @default(PENDING)
 
-  customer Customer @relation(fields: [customerId], references: [id])
-
+  customer   Customer @relation(fields: [customerId], references: [id])
   customerId String
 
   product   Product @relation(fields: [productId], references: [id])

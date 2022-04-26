@@ -1,14 +1,14 @@
-import { Field, ObjectType, ID, registerEnumType } from '@nestjs/graphql';
+import { Field, ID, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Product } from './product';
 
-enum ProductStatus {
-  APPROVED = 'APPROVED',
+enum PurchaseStatus {
   PENDING = 'PENDING',
+  APPROVED = 'APPROVED',
   FAILED = 'FAILED',
 }
 
-registerEnumType(ProductStatus, {
-  name: 'ProductStatus',
+registerEnumType(PurchaseStatus, {
+  name: 'PurchaseStatus',
   description: 'Available purchase statuses',
 });
 
@@ -17,8 +17,8 @@ export class Purchase {
   @Field(() => ID)
   id: string;
 
-  @Field(() => ProductStatus)
-  status: ProductStatus;
+  @Field(() => PurchaseStatus)
+  status: PurchaseStatus;
 
   @Field(() => Date)
   createdAt: Date;

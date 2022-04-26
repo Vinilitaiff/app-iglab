@@ -23,7 +23,6 @@ export class AuthorizationGuard implements CanActivate {
     // const httpContext = context.switchToHttp();
     // const request = httpContext.getRequest();
     //const response = httpContext.getResponse();
-    console.log('teste')
 
     const { req, res } = GqlExecutionContext.create(context).getContext();
 
@@ -42,8 +41,6 @@ export class AuthorizationGuard implements CanActivate {
     );
 
     try {
-      console.log(req);
-      console.log(res);
       await checkJWT(req, res);
     } catch (error) {
       throw new UnauthorizedException(error);
